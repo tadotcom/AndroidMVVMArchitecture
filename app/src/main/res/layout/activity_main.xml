@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="view_model" type="com.example.mvvm.MainViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.MainActivity">
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textSize="20dp"
+                android:text="Androidのデータバインディング"/>
+
+            <EditText
+                android:id="@+id/edit"
+                android:text="@{view_model.editTextLiveData}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:addTextChangedListener="@{view_model.onEditText()}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    app:backgroundTint="#00ff00"
+                    android:text="OK"
+                    android:onClick="@{() -> view_model.okBtnClick()}"/>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    app:backgroundTint="#ffff4444"
+                    android:text="クリア"
+                    android:onClick="@{() -> view_model.cancelBtnClick()}"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:textSize="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:text="@{view_model.textLiveData}"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
